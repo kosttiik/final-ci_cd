@@ -1,4 +1,4 @@
-name: final_main
+name: final_ci-cd
 on: push
 jobs:
   test:
@@ -35,7 +35,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5.5.1
         with:
-          images: kosttiik/final_ci_cd
+          images: kosttiik/final_ci-cd
 
       - name: Build and push Docker Image
         uses: docker/build-push-action@v5
