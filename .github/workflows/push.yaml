@@ -1,5 +1,10 @@
 name: final_ci-cd
-on: push
+
+on:
+  push:
+    tags:
+      - "*"
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -7,12 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run Unit Tests
-        run: GOOS=linux GOARCH=amd64 go test
+      - name: Run Vet
+        run: go vet ./...
 
-      - name: Vet
-        run: |
-          go vet ./...
+      - name: Run Unit Tests
+        run: GOOS=linux GOARCH=amd64 go test ./...
+
   deploy:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
